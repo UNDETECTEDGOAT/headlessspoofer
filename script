@@ -7,8 +7,7 @@ local character = player.Character or player.CharacterAdded:Wait()
 local head = character:WaitForChild("Head")
 
 local function hideHead()
-    -- Hide head
-    head.LocalTransparencyModifier = 1
+    -- Hide the head
     head.Transparency = 1
 
     -- Hide face decals
@@ -19,5 +18,6 @@ local function hideHead()
     end
 end
 
--- Run every frame so Roblox can't make the head visible again
+hideHead()
+
 RunService.RenderStepped:Connect(hideHead)
