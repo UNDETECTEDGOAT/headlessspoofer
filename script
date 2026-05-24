@@ -1,0 +1,10 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local head = character:WaitForChild("Head")
+head.LocalTransparencyModifier = 1
+
+local face = head:FindFirstChildOfClass("Decal")
+if face then
+    face.Transparency = 1
+end
