@@ -1,10 +1,26 @@
 local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
 
-local head = character:WaitForChild("Head")
-head.LocalTransparencyModifier = 1
+local function hideHead(character)
+    local head = character:WaitForChild("Head")
 
-local face = head:FindFirstChildOfClass("Decal")
-if face then
-    face.Transparency = 1
+    head.LocalTransparencyModifier = 1
+
+    local face = head:FindFirstChildOfClass("Decal")
+    if face then
+        face.Transparency = 1
+    end
+end
+
+local function setupCharacter(char)
+    hideHead(char)
+
+    char:WaitForChild("Head").Changed:Connect(function()
+        hideHead(char)
+    end)
+end
+
+player.CharacterAdded:Connect(setupCharacter)
+
+if player.Character then
+    setupCharacter(player.Character)
 end
